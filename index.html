@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Restaurant Menu</h1>
+    <div id="dark-mode-container">
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+        <span id="dark-mode-label">Dark Mode</span>
+    </div>
+    <div id="menu-buttons">
+        <button class="menu-button" onclick="loadMenu('pdfs/menu1.pdf')">Wine & Canape Pairing</button>
+        <button class="menu-button" onclick="loadMenu('pdfs/menu2.pdf')">Signature Cocktails</button>
+        <button class="menu-button" onclick="loadMenu('pdfs/menu3.pdf')">Food Menu</button>
+        <button class="menu-button" onclick="loadMenu('pdfs/menu4.pdf')">Wine By The Glass</button>
+    </div>
+    <button id="back-button" class="disabled" onclick="showMenuButtons()">Back</button>
+    <div id="pdf-container" style="display: none;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
