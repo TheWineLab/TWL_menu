@@ -16,8 +16,10 @@ function loadMenu(pdfUrl) {
         for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
             pdf.getPage(pageNumber).then(page => {
                 console.log(`Page ${pageNumber} loaded`);
-
-                const scale = 1.5;
+                const dpr= window.devicePixelRatio;
+                const scale = window.devicePixelRatio * 1.2 || 1; // Adjust scale based on device pixel ratio
+                console.log(`this is my own ${dpr}` );
+                
                 const viewport = page.getViewport({ scale });
 
                 // Prepare canvas using PDF page dimensions
