@@ -1,12 +1,14 @@
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
 
+// Function to load the menu PDF
 function loadMenu(pdfUrl) {
     console.log(`Loading PDF from: ${pdfUrl}`);
     document.getElementById('menu-buttons').style.display = 'none';
     document.getElementById('back-button').classList.remove('disabled');
     document.getElementById('pdf-container').style.display = 'flex';
     document.getElementById('pdf-container').innerHTML = ''; // Clear previous content
+    document.getElementById('access-message').style.display = 'none';
 
     const loadingTask = pdfjsLib.getDocument(pdfUrl);
     loadingTask.promise.then(pdf => {
@@ -16,10 +18,12 @@ function loadMenu(pdfUrl) {
         for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
             pdf.getPage(pageNumber).then(page => {
                 console.log(`Page ${pageNumber} loaded`);
-                const dpr= window.devicePixelRatio;
-                const scale = window.devicePixelRatio * 1.2 || 1; // Adjust scale based on device pixel ratio
-                console.log(`this is my own ${dpr}` );
-                
+                let dpr = window.devicePixelRatio
+                console.log(`this is device dpr: ${dpr}` );
+                if (dpr < 3) {
+                    dpr = 3;
+                }
+                const scale = dpr || 1; // Adjust scale based on device pixel ratio
                 const viewport = page.getViewport({ scale });
 
                 // Prepare canvas using PDF page dimensions
@@ -46,26 +50,4 @@ function loadMenu(pdfUrl) {
     }, reason => {
         console.error('Error loading PDF:', reason);
     });
-}
-
-function showMenuButtons() {
-    if (document.getElementById('back-button').classList.contains('disabled')) {
-        return;
-    }
-    document.getElementById('menu-buttons').style.display = 'flex';
-    document.getElementById('back-button').classList.add('disabled');
-    document.getElementById('pdf-container').style.display = 'none';
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const toggleButton = document.getElementById('dark-mode-toggle');
-    const toggleLabel = document.getElementById('dark-mode-label');
-    if (document.body.classList.contains('dark-mode')) {
-        toggleButton.textContent = '☀️';
-        toggleLabel.textContent = 'Light Mode';
-    } else {
-        toggleButton.textContent = '🌙';
-        toggleLabel.textContent = 'Dark Mode';
-    }
 }

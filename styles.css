@@ -17,8 +17,9 @@ body {
 h1 {
     text-align: center;
     margin-top: 20px;
-    font-size: 2em;
-    color: #333;
+    font-size: 3em;
+    color: #722f37; /* Wine color */
+    font-family: 'Great Vibes', cursive; /* Exotic font */
 }
 
 #menu-buttons {
@@ -119,6 +120,35 @@ h1 {
     margin-left: 10px;
     font-size: 16px;
     color: #333;
+}
+
+/* Styling for the geofence message */
+#access-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    color: #333;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#access-message div {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+#access-message div .emoji {
+    font-size: 5rem;
+}
+
+#access-message div .message {
+    font-size: 1.5rem;
+    margin-top: 1rem;
 }
 
 /* Dark mode styles */
