@@ -19,8 +19,13 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c; // Distance in kilometers
 }
 
-// Function to load the menu with geofencing
+// Function to load the menu with geofencing (currently disabled)
 function loadMenuWithGeofence(pdfUrl) {
+  // Temporarily bypass geofencing check
+  loadMenu(pdfUrl);
+
+  // Uncomment the following code to re-enable geofencing
+  /*
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -35,27 +40,19 @@ function loadMenuWithGeofence(pdfUrl) {
         );
         console.log(`User is ${distance.toFixed(2)} km from the restaurant`);
 
-        console.log(`Allowed maximum distance: ${maxDistance} km`);
-        console.log(`Actual distance: ${distance.toFixed(2)} km`);
-
         if (distance <= maxDistance) {
-          console.log("User is within the allowed distance. Loading menu...");
-          loadMenu(pdfUrl);
+          loadMenu(pdfUrl); // Load the menu if within range
         } else {
-          console.log(
-            "User is outside the allowed distance. Displaying geofence message..."
-          );
-          document.getElementById("access-message").style.display = "flex";
+          document.getElementById('access-message').style.display = 'flex'; // Show geofence message
         }
       },
       (error) => {
-        console.error("Error getting location:", error);
-        alert(
-          "Unable to verify your location. Please enable location services."
-        );
+        console.error('Error getting location:', error);
+        alert('Unable to verify your location. Please enable location services.');
       }
     );
   } else {
-    alert("Geolocation is not supported by your browser.");
+    alert('Geolocation is not supported by your browser.');
   }
+  */
 }
